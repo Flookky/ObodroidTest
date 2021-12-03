@@ -1,5 +1,7 @@
 package com.example.obodroid.ui
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
@@ -61,6 +63,7 @@ class MainActivity : BaseActivity() {
         Control.screen_height = binding.root.measuredHeight
         println("Width of screen = ${Control.screen_width}")
         println("Height of screen = ${Control.screen_height}")
+        window.decorView.systemUiVisibility = Control.flags
     }
 
 

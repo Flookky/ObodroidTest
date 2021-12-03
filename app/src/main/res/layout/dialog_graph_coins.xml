@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp"
+    app:cardCornerRadius="30dp"
+    app:cardElevation="20dp"
     >
 
     <androidx.core.widget.NestedScrollView
@@ -17,12 +19,11 @@
             android:layout_height="match_parent"
             >
 
-            <com.google.android.material.textview.MaterialTextView
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/graphTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@color/toolbar"
                 android:text="กราฟเเสดงข้อมูลราคาเหรียญดิจิทัลทั้งหมด 50ตัว"
                 android:textColor="@color/black"
                 android:textSize="20sp"
@@ -31,19 +32,64 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-            </com.google.android.material.textview.MaterialTextView>
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    app:srcCompat="@drawable/ic_bargraph"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/lineChart"
-                android:layout_width="match_parent"
-                android:layout_height="350dp"
-                android:layout_margin="20dp"
-                android:scrollbars="horizontal"
+                </com.google.android.material.imageview.ShapeableImageView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/graphTitleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="กราฟเเสดงข้อมูลราคาเหรียญดิจิทัล"
+                android:textSize="18sp"
+                android:textStyle="italic|bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/graphTitle">
 
-            </com.github.mikephil.charting.charts.LineChart>
+            </com.google.android.material.textview.MaterialTextView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardChart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/graphTitleText">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/lineChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="350dp"
+                        android:layout_margin="10dp"
+                        android:scrollbars="horizontal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                    </com.github.mikephil.charting.charts.LineChart>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
 
             <com.github.mikephil.charting.charts.HorizontalBarChart
                 android:id="@+id/horizonChart"
@@ -70,7 +116,7 @@
                 android:text="ให้เเกน X คือรายชื่อเหรียญดิจิทัล"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lineChart">
+                app:layout_constraintTop_toBottomOf="@+id/cardChart">
 
             </com.google.android.material.textview.MaterialTextView>
 
@@ -80,7 +126,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:text="เเละเเกน Y คือราคาของเหรียญ"
                 android:textColor="@color/black"
@@ -95,8 +141,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
+                android:padding="10dp"
                 android:text="ย้อนกลับ"
-                android:textSize="20sp"
+                android:textSize="18sp"
+                app:backgroundTint="@color/elderGreen"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/black"
+                app:cornerRadius="24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">

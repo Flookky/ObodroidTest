@@ -5,6 +5,34 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="redPink">#FF1F7B</color>
+    <color name="pinkWhite">#FF80AC</color>
+    <color name="green">#48FF2A</color>
+    <color name="moreGreen">#38DF1C</color>
+    <color name="elderGreen">#21A30F</color>
+    <color name="yellow">#FFFE00</color>
+    <color name="cream">#FFFFA2</color>
+    <color name="orange">#FFA100</color>
+    <color name="blue">#0361FF</color>
+    <color name="sky">#3CBBFF</color>
+    <color name="navyBlue">#0347B8</color>
+    <color name="gold">#FFD70E</color>
+    <color name="red">#FF0000</color>
+    <color name="brown">#7C5000</color>
+    <color name="olderBrown">#4C200C</color>
+    <color name="grey">#949494</color>
+    <color name="gray">#ECEAEA</color>
+    <color name="lightGrey">#ECECEC</color>
+    <color name="toolbar">#FF475E</color>
+    <color name="statusBar">#BC2639</color>
+    <color name="actionbar">#991C27</color>
+    <color name="transparent">#00000000</color>
+    <color name="black_transparent">#55000000</color>
+
 </resources>

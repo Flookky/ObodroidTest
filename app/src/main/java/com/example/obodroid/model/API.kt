@@ -1,7 +1,11 @@
 package com.example.obodroid.model
 
 import com.example.obodroid.model.Retrofit.Interface.CoinsService
+import com.example.obodroid.model.Retrofit.response.CoinsResponse
 import com.google.gson.GsonBuilder
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.forEach
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
@@ -18,4 +22,6 @@ object API {
             .addConverterFactory(ScalarsConverterFactory.create())
             .build()
             .create(CoinsService::class.java)
+
+
 }

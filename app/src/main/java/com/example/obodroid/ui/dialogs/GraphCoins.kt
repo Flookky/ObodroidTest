@@ -1,12 +1,10 @@
 package com.example.obodroid.ui.dialogs
 
+import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
+import android.view.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.example.obodroid.Control.Control
@@ -20,6 +18,8 @@ import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.github.mikephil.charting.formatter.ValueFormatter
+import java.text.DecimalFormat
 
 class GraphCoins(val coins: ArrayList<Coins>): DialogFragment() {
     private lateinit var myContext: Context
@@ -53,9 +53,9 @@ class GraphCoins(val coins: ArrayList<Coins>): DialogFragment() {
         xAxis.setDrawGridLines(false)
         xAxis.setDrawAxisLine(false)
         binding.lineChart.axisRight.isEnabled = false
-        binding.lineChart.legend.isEnabled = false
+        binding.lineChart.legend.isEnabled = true
         binding.lineChart.description.isEnabled = false
-
+        binding.lineChart.setScaleMinima(6f,2f)
         binding.lineChart.animateX(1000, Easing.EaseInSine)
         xAxis.position = XAxis.XAxisPosition.BOTTOM_INSIDE
         xAxis.valueFormatter = CoinAxisFormatter()
@@ -72,8 +72,16 @@ class GraphCoins(val coins: ArrayList<Coins>): DialogFragment() {
         for (i in coins.indices){
             entries.add(Entry(i.toFloat(), coinEnt[i].price))
         }
-        val lineDataSet = LineDataSet(entries, "")
+        val lineDataSet = LineDataSet(entries, "มูลค่าของเหรียญ หน่วยบาท")
         val data = LineData(lineDataSet)
+        data.setValueTextSize(8F)
+        data.setValueFormatter(PriceValueFormatter())
+        lineDataSet.lineWidth = 4f
+        lineDataSet.valueTextSize = 8f
+        lineDataSet.color = ContextCompat.getColor(myContext, R.color.navyBlue)
+        lineDataSet.circleHoleColor = ContextCompat.getColor(myContext, R.color.white)
+        lineDataSet.setCircleColor(ContextCompat.getColor(myContext, R.color.toolbar))
+        lineDataSet.circleSize = 6f
         binding.lineChart.data = data
         binding.lineChart.invalidate()
     }
@@ -84,6 +92,21 @@ class GraphCoins(val coins: ArrayList<Coins>): DialogFragment() {
         }
 
         return coinEnt
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setStyle(STYLE_NO_INPUT, android.R.style.Theme)
+        dialog?.window?.decorView?.systemUiVisibility
+        dialog?.window?.attributes?.windowAnimations = R.style.DialogAnimation
+        dialog?.window?.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
+        dialog?.window?.setBackgroundDrawableResource(R.color.transparent)
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog?.window?.decorView?.systemUiVisibility = Control.flags
+        return super.onCreateDialog(savedInstanceState)
     }
 
     override fun onAttach(context: Context) {
@@ -98,6 +121,10 @@ class GraphCoins(val coins: ArrayList<Coins>): DialogFragment() {
         dialog?.window?.setLayout(width, height)
     }
 
+    override fun onResume() {
+        super.onResume()
+    }
+
     inner class CoinAxisFormatter: IndexAxisValueFormatter(){
         override fun getAxisLabel(value: Float, axis: AxisBase?): String {
             val index = value.toInt()
@@ -106,6 +133,15 @@ class GraphCoins(val coins: ArrayList<Coins>): DialogFragment() {
             } else {
                 ""
             }
+        }
+    }
+
+    inner class PriceValueFormatter: ValueFormatter() {
+        private lateinit var mFormat: DecimalFormat
+
+        override fun getFormattedValue(value: Float): String {
+            mFormat = DecimalFormat("0.00")
+            return mFormat.format(value).toString() + " ฿"
         }
     }
 }

@@ -1,12 +1,14 @@
 package com.example.obodroid.viewmodel
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.obodroid.model.API
 import com.example.obodroid.model.Retrofit.response.CoinsResponse
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectIndexed
+import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 class MainViewModel: ViewModel() {
@@ -20,7 +22,6 @@ class MainViewModel: ViewModel() {
                     val body = response.body()
                     if (body != null){
                         coinLiveData.postValue(body)
-                        //println("Body id $body")
                     }
                 }
             }
